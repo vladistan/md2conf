@@ -181,6 +181,7 @@ def main() -> None:
         render_mermaid=args.render_mermaid,
         diagram_output_format=args.diagram_output_format,
         webui_links=args.webui_links,
+        kroki_output_format=args.kroki_output_format,
     )
     properties = ConfluenceProperties(
         args.domain, args.path, args.username, args.apikey, args.space, args.headers

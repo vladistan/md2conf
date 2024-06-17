@@ -76,7 +76,7 @@ class TestAPI(unittest.TestCase):
     def test_get_attachment(self) -> None:
         with ConfluenceAPI() as api:
             data = api.get_attachment_by_name(
-                TEST_PAGE_ID, "figure_interoperability.png"
+                TEST_PAGE_ID, "figure/interoperability.png"
             )
             self.assertIsInstance(data, ConfluenceAttachment)
 
@@ -89,6 +89,22 @@ class TestAPI(unittest.TestCase):
                 comment="A sample figure",
                 force=True,
             )
+
+    def test_synchronize_with_mermaid(self) -> None:
+        with ConfluenceAPI() as api:
+            Application(
+                api, ConfluenceDocumentOptions(ignore_invalid_url=True)
+            ).synchronize(self.sample_dir / "with_mermaid.md")
+
+    def test_synchronize_with_mermaid_render_svg(self) -> None:
+        with ConfluenceAPI() as api:
+            Application(
+                api, ConfluenceDocumentOptions(
+                    ignore_invalid_url=True,
+                    render_mermaid=True,
+                    kroki_output_format='svg'
+                )
+            ).synchronize(self.sample_dir / "with_mermaid.md")
 
     def test_synchronize(self) -> None:
         with ConfluenceAPI() as api:
