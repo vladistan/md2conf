@@ -76,7 +76,7 @@ class TestAPI(unittest.TestCase):
     def test_get_attachment(self) -> None:
         with ConfluenceAPI() as api:
             data = api.get_attachment_by_name(
-                TEST_PAGE_ID, "figure/interoperability.png"
+                TEST_PAGE_ID, "figure_interoperability.png"
             )
             self.assertIsInstance(data, ConfluenceAttachment)
 
